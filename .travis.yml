@@ -1,0 +1,61 @@
+sudo: required
+dist: trusty
+language: ruby
+
+before_install:
+before_install:
+- gem install asciidoctor -v 1.5.2
+- gem install tilt
+- sudo pip install git+https://github.com/gitenberg-dev/gitberg
+- sudo pip install pillow
+- sudo pip install cssutils
+- sudo pip install docutils
+- sudo pip install roman
+- sudo pip install git+https://github.com/gitenberg-dev/pg-epubmaker
+script:
+- VERSION=`ruby -e "require 'yaml'; meta = YAML.load_file('metadata.yaml'); puts meta['_version'];"`
+- git clone https://github.com/gitenberg-dev/asciidoctor-htmlbook.git
+- sudo pip install -r asciidoctor-htmlbook/gitberg-machine/requirements.txt
+
+- /usr/bin/python -c "from gitenberg import travis; travis.build_epub()"
+- ebook-convert book.epub book.mobi
+- xvfb-run ebook-convert book.epub book.pdf
+branches:
+  only:
+  - master
+notifications:
+  webhooks:
+    urls:
+      - https://unglue.it/api/travisci/webhook
+    on_success: always
+    on_failure: never
+    on_start: never
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: CYwk7KIjGVTMV8LMK4N3lVRlikde3WEpWdwYNJzJdSnIl98NG3MHdr4th0UaHeZEiyAs2GwDf7J7mpGgDkFkPVuMBBp/274LhlsvlBsWJtX3sEkTVNdQgE2WDVxKAOl7KaB4IqcYG20wKM+A4ynS6vtHPHUbT36HMGcq2KNYPcnubul4browcCr6e4SmwiCdn+7c3pezHKV68x7UV4X6rDrPkxBM5TzKCuBd88wtj3n0PDXudMNIwylxZ2kdU3FaKAGeog4IyKhnhputrfxsokOnFeCd6MpYpm3GqElnM1yn4LfRr5C5Z+TpMsyf8WYQLQpfRaZlJUJUJNzjBxVytHvcAGL3quBRmJ8hUUknMwzUyg4NmajBUCLkpb2VAHhjSDAj0FDHIJ9CusmE7E9nfVWkjC+utPE/Ct13RGkWMsAKLz50R1MpMsgdJvdTsY1pgKrVVgbQV7PpnCsEZOsup1d5ZWdJh8H+jGX0wJ0CAgEnoH+NPg6eS1Y0Ll5YbWa19IMMg1dd2uAZ0KtqGWlrJbIrh2+bWXJ6IHQWtn2U9hJynIHy2NYKh/WrUVSP1R74vIU9oQrALh5iQX8b+RQuS80KHpqW2zacvEXstJWt/BlcDVOglyLZHENsXoCvrFHR3ToTUkbB54Q3r/vCdc1hTPCspjt2LwkYHCPWApOpZN4=
+  file:
+    - book.epub
+    - book.mobi
+    - book.pdf
+  "on":
+    repo: GITenberg/Army-Boys-on-German-Soil-Our-Doughboys-Quelling-the-Mobs_6140
+addons:
+  apt:
+    packages:
+    - xsltproc
+    - xvfb
+    - calibre
+    - python-pip
+    - git
+    - python-dev
+    - libjpeg-dev
+    - libpng-dev
+    - libfreetype6
+    - libfreetype6-dev
+    - zlib1g-dev
+    - python-lxml
+    - libxml2-dev
+    - libxslt1-dev
+    - tidy
