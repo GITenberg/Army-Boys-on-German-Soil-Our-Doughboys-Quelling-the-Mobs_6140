@@ -1,11 +1,16 @@
 _repo: Army-Boys-on-German-Soil-Our-Doughboys-Quelling-the-Mobs_6140
-_version: 0.1.0
+_version: 0.2.0
+covers:
+- cover_type: generated
+  image_path: cover.png
 creator:
   author:
     agent_name: Randall, Homer
     gutenberg_agent_id: '1970'
     url: http://www.gutenberg.org/2009/agents/1970
 description: ''
+edition_identifiers:
+  edition_id: http://www.gutenberg.org/ebooks/6140#Army-Boys-on-German-Soil-Our-Doughboys-Quelling-the-Mobs
 gutenberg_bookshelf: World War I
 gutenberg_issued: '2004-07-01'
 gutenberg_type: Text
