@@ -1,5 +1,5 @@
 _repo: Army-Boys-on-German-Soil-Our-Doughboys-Quelling-the-Mobs_6140
-_version: 0.2.0
+_version: 0.2.1
 covers:
 - cover_type: generated
   image_path: cover.png
@@ -23,5 +23,6 @@ rights_url: http://creativecommons.org/about/pdm
 subjects:
 - !lcsh 'World War, 1914-1918 -- Juvenile fiction'
 - !lcc 'PZ'
+- GITenberg
 title: 'Army Boys on German Soil: Our Doughboys Quelling the Mobs'
 url: http://www.gutenberg.org/ebooks/6140
